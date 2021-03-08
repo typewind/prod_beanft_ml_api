@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> -->
+</head>
+
+<div class="large-empty-row">
+</div>
+
+<body>
+  <title>Fit my Model</title>
+  <h2>You are predicting using: {{ data_reload }}</h2>
+  <br>
+  <p>The first 10 rows of your data is previewed in the table below. Scroll down to select your predictor variables and target variable.</p>
+  <!-- <div class="alert alert-info" role="alert"><p><span style="color:red">Size</span>: {{ new_data_size }}</p></div>
+  <div class="alert alert-info" role="alert"><p><span style="color:red">Information</span>: {{ new_data_info }}</p></div> -->
+  <!-- ADD TYPE OF EACH COLUMN -->
+  <div class="alert alert-danger" role="alert"><p><span style="color:red">Dimension of uploaded data</span>: <br/>
+  (Row,Columns)<br/>
+  {{ new_data_shape }}</p></div>
+
+  <br>
+  <div id="myDIV" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+    {{ new_dataplot.to_html(classes="table table-striped table-hover",na_rep="-") | safe}}
+  </div>
+
+  <form class="form-inline" method="POST" action="/fit" id = "my_form_id">
+    <div class="form-group">
+      <div class="input-group_y">
+      <span class="input-group-addon">Select y variable </span> <br>
+        <select name="y_var" class="selectpicker form-control">
+          {% for column in dropdown_list %}
+          <option value= "{{ column }}" SELECTED>{{ column }}</option><br>
+          {% endfor %}
+        </select>
+      </div>
+      <div class ="empty-row">
+      </div>
+      <div class="input-group_x">
+        <span class="input-group-addon">Select x variables </span><br>
+          <select name="x_vars" class="selectpicker form-control" multiple id="mymultiselect">
+            {% for column in dropdown_list %}
+            <option value= "{{ column }}" SELECTED>{{ column }}</option><br>
+            {% endfor %}
+          </select>
+      </div>
+      <div class ="empty-row">
+      </div>
+      <div class="cat_or_reg">
+        <p>Choose prediction type</p>
+          <input type="radio" class="form-check-input" name="rd_pred_type"  value="Classification"> Classification
+          <br>
+          <input type="radio" class="form-check-input" name="rd_pred_type"  value="Regression"> Regression
+          <div class= "hint_text">
+            <p><em>*Hint: For a regression style model, explanatory variables must contain integers or real numbers. For a categorical model, the predicted variable must consist of less than 6 factors for optimal accuracy.</em></p>
+          </div>
+      </div>
+      <div class ="large-empty-row">
+      </div>
+      <div class="train_submit_button">
+        <input type="submit"  onclick="$('#loading').show();" class="btn btn-primary" value="Submit">
+      </div>
+    </div>
+  </form>
+
+  <div id="loading" style="display:none;"><img src="static/profile_pics/loadingimage.gif" alt="" /><br>Model is thinking!</div>
+
+  <div class ="large-empty-row">
+  </div>
+
+</body>
+
+{% endblock %}

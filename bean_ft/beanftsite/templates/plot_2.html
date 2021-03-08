@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class ="large-empty-row">
+</div>
+
+<body>
+  <h2>Select the columns you want visualised below:</h2>
+  <form class="form-inline" action="/graph" method="POST" id = "my_form_id">
+    <div class="form-group">
+      <div class="input-group_y">
+      <span class="input-group-addon">Select "x" column</span> <br>
+        <select name="select_x" class="selectpicker form-control">
+          {% for column in dropdown_list %}
+          <option value= "{{ column }}" SELECTED>{{ column }}</option><br>
+          {% endfor %}
+        </select>
+      </div>
+      <div class ="empty-row">
+      </div>
+      <div class="input-group_x">
+        <span class="input-group-addon">Select "y" column </span><br>
+          <select name="select_y" class="selectpicker form-control">
+            {% for column in dropdown_list %}
+            <option value= "{{ column }}" SELECTED>{{ column }}</option><br>
+            {% endfor %}
+          </select>
+      </div>
+      <div class ="empty-row">
+      </div>
+      <input type="submit"  onclick="myAnalyser()" class="btn btn-primary" value="Submit">
+    </div>
+  </form>
+</body>
+{% endblock %}
+

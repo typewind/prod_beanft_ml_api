@@ -1,0 +1,13 @@
+# create a virtual env using CMD
+virtualenv env
+
+# activate it
+env\Scripts\activate
+
+# istall the needed 2 dependencies
+pip install flask uwsgi
+
+# generate the req files
+pip freeze > requirements.txt
+
+touch run.py

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<head>
+  <div class="large-empty-row">
+  </div>
+</head>
+
+
+<body>
+  <div class="jumbotron">
+    <div align='center'>
+      <h1>Welcome to the page for {{current_user.username}}</h1>
+      <img align='center' src="{{ url_for('static', filename='profile_pics/' + current_user.profile_image) }}">
+      <p>{{ current_user.email }}</p>
+    </div>
+  </div>
+  <div class="container">
+  </div>
+  <br>
+  {% if current_user.is_authenticated %}
+    <p>You have signed in. Now you can create your model or visualise some data.</p>
+    <p><a href="{{ url_for('uploader.uploads')}}" type="button" class="btn btn-primary" >Model</a></p>
+    <p><a href="{{ url_for('uploader.plot')}}" type="button" class="btn btn-primary" >Visualise</a></p>
+  {% else %}
+    <p>If you do not have an account or want to create another account, click the button below.</p>
+    <p><a href="{{ url_for('users.register')}}" type="button" class="btn btn-primary" >Register</a></p>
+  {% endif %}
+</body>
+
+{% endblock content %}

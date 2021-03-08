@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}" /> -->
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+
+
+<div class="large-empty-row">
+</div>
+
+<body>
+
+    <title>Fit my Model</title>
+    <div class="alert alert-danger" role="alert" >
+      <p>This is a {{ pred_type_select }} type prediction. You are predicting <span style="color:rgb(255, 0, 0)">{{ y_var_select }}</span> against the following predictor variables.</p>
+    </div>
+    <div class="alert alert-info" role="alert" style="background-color:#e6e7e8;border-color:#d8d9da">
+      <p><span style="color:rgb(0, 0, 0)">Predictor variables: </span>
+      <ul class = "csv">
+        {% for column in multiselect %}
+          <li>{{ column }}</li>
+        {% endfor %}
+      </ul>
+      </p>
+    </div>
+    <div class="empty-row">
+    </div>  
+    <h2>Model Score</h2>
+    <div class="col_ms">
+      {% for mlaccuracy  in model_results %}
+      <div class="list-group">
+          <a href="#" class="list-group-item" style="background-color:#e6e7e8">
+            <span style="color:rgb(0, 0, 0)">ML Algorithm - Performance Metrics (Mean R<sup>2</sup>/RMSE) | Mean Standard Deviation</span></a>
+          <a href="#" class="list-group-item">{{ mlaccuracy }}</a>
+      </div>
+      <br>
+      {% endfor %}
+    </div>
+
+    <div class="large-empty-row">
+    </div>
+
+    <form method="post" action="/predict_data" enctype="multipart/form-data">
+      <div>
+        <span class="input-group-addon">Which of these models would you like to use?</span><br>
+        <select name="selected_model" class="selectpicker form-control">
+          {% for model in model_names %}
+          <option value= "{{ model }}" SELECTED>{{ model }}</option><br>
+          {% endfor %}
+        </select>
+      </div>    
+    
+      <div class="large-empty-row">
+      </div>
+    
+      <div>
+        <span class="input-group-addon">Select file to predict with.</span><br>
+        <p>
+          <dl>
+              <p>
+                  <input type="file" name="inputTestFile" multiple="true" autocomplete="off" required>
+              </p>
+          </dl>
+          <br>
+          <input type="submit"  class="btn btn-primary" value="Show predicted data">
+        </p>
+      </div>
+    </form>
+
+</body>
+
+{% endblock %}
+

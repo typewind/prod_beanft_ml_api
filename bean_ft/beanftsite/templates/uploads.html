@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="large-empty-row">
+</div>
+
+<title>Upload your file here</title>
+<h2>Select file to upload</h2>
+<p>
+    <form method="post" action="/train" enctype="multipart/form-data">
+        <dl>
+            <p>
+                <input type="file" name="inputFiles" multiple="true" autocomplete="off" required>
+            </p>
+        </dl>
+        <br>
+        <input type="submit"  onclick="myAnalyser()" class="btn btn-primary" value="Submit">
+    </form>
+</p>
+{% endblock %}
+
+
+

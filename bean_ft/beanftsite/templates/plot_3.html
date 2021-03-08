@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class ="large-empty-row">
+</div>
+<h2>Right click and save plot or click "Plot" to select new fields to plot. Reloading the page will break the app.</h2>
+<br>
+<p>On your x axis is "{{  x_axis_select_str }}"</p>
+<p>On your y axis is "{{  y_axis_select_str }}"</p>
+<body>
+  <div style = "width:50%; float:left">
+    <img src="data:image/png;base64, {{ plot_url }}">
+  </div>
+</body>
+
+{% endblock %}
+

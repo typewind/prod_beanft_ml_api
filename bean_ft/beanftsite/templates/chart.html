@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class ="large-empty-row">
+</div>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Chart.js Example</title>
+  <!-- import plugin script -->
+  <script src='static/Chart.min.js'></script>
+</head>
+<body>
+  <h2>The chart is displaying a simple scatter plot</h2>
+  <!-- bar chart canvas element -->
+  <canvas id="myChart" width="600" height="400"></canvas>
+  <div class ="large-empty-row">
+  </div>
+  <p id="caption">On your x axis is "{{  x_axis_select_str }}"</p>
+  <p id="caption">On your y axis is "{{  y_axis_select_str }}"</p>
+
+  <script>
+    // Global parameters:
+    // do not resize the chart canvas when its container does (keep at 600x400px)
+    Chart.defaults.global.responsive = false;
+
+    // define the chart data
+    var chartData = {
+      labels : [{% for item in labels %}
+                  "{{item}}",
+                {% endfor %}],
+      datasets : [{
+          label: '{{  y_axis_select_str }}',
+          fill: false,
+          lineTension: 0,
+          backgroundColor: "rgba(75,192,192,0.4)",
+          borderColor: "rgba(75,192,192,1)",
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: "rgba(75,192,192,1)",
+          pointBackgroundColor: "#fff",
+          pointBorderWidth: 1,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: "rgba(75,192,192,1)",
+          pointHoverBorderColor: "rgba(220,220,220,1)",
+          pointHoverBorderWidth: 2,
+          pointRadius: 2,
+          pointHitRadius: 2,
+          showLine: false,
+          data: [{% for vals in values %}
+                  "{{vals}}",
+                {% endfor %}]
+      }]
+    }
+
+    // get chart canvas
+    var ctx = document.getElementById("myChart").getContext("2d");
+
+    // create the chart using the chart canvas
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: chartData,
+      // options: {
+      //   scales: {
+      //     xAxes: [{
+      //         type: 'linear',
+      //         position: 'bottom'
+      //     }]
+      //   }
+      // }
+    });
+  </script>
+
+</body>
+
+{% endblock %}

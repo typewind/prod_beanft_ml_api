@@ -1,0 +1,64 @@
+
+/*. for class , # for id*/
+
+#loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*FOR LISTING HORIZONTALLY USING COMMAS*/
+ul.csv { list-style: none; margin: 0; padding: 0;color:rgb(255, 0, 0) }
+ul.csv li { display: inline; }
+ul.csv li:after { content: ","; }
+ul.csv li:last-child:after { content: ""; }
+
+.col_ms
+{
+	width:100%;
+	background-color:#00aeef;
+	position: relative;
+	min-height: 1px;
+	padding: 20px 20px;
+}
+
+.hint_text
+{
+    width:50%;
+	font-size: 12px;
+}
+
+.input-group_x
+{
+    width:50%;
+    margin-bottom:2em;
+    float:left;
+}
+
+.input-group_y
+{
+    width:50%;
+    margin-bottom:2em;
+	float:left;
+}
+
+/*.fit_body
+{
+    background-color:#333;
+}
+*/
+
+/*FOR INTER-LINE SPACING*/
+.large-empty-row
+{
+    width:100%;
+	padding: 10px 10px;
+}
+
+.empty-row
+{
+    width:100%;
+	padding: 2px 2px;
+}
+

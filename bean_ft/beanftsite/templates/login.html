@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+<head>
+    <div class="large-empty-row">
+    </div>
+</head>
+
+<body>
+    <p>You are almost there, simply login or create an account to access the bean forecast tool and more.</p>
+    <form method="POST">
+        {# This hidden_tag is a CSRF security feature. #}
+        {{ form.hidden_tag() }}
+        {{ form.email.label }} {{ form.email() }}
+        <br>
+        {{ form.password.label }} {{ form.password() }}
+        <br>
+        {{ form.submit() }}
+        <div class="large-empty-row">
+        </div>
+        <p>
+            If you do not have an account, click <a href="{{ url_for('users.register')}}">here</a> to create one.
+        </p>
+    </form>
+</body>
+
+{% endblock %}
